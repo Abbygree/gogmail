@@ -34,9 +34,9 @@ func (gmail *GMail) SendMail(recipients []string, subject, body string, isHTML b
 	var message string
 	if isHTML {
 		mime := "MIME-version: 1.0;\nContent-Type: text/html; charset=\"UTF-8\";\n\n"
-		message = fmt.Sprintf("From: %s\nTo: %s\nSubject: %s\n\n%s%s", sender, recipientString, subject, mime, body)
+		message = fmt.Sprintf("Subject: %s\nFrom: %s\nTo: %s\n%s%s", subject, sender, recipientString, mime, body)
 	} else {
-		message = fmt.Sprintf("From: %s\nTo: %s\nSubject: %s\n\n%s", sender, recipientString, subject, body)
+		message = fmt.Sprintf("Subject: %s\nFrom: %s\nTo: %s\n%s", subject, sender, recipientString, body)
 	}
 
 	err := smtp.SendMail(fmt.Sprintf("%s:%d", SERVER, PORT),
